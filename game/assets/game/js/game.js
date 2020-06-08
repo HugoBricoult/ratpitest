@@ -41,6 +41,7 @@ function create ()
             p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = playerList[i].id;
+            p.tint = Math.random() * 0xffffff;;
             players.push(p);
         }
     }
@@ -101,6 +102,7 @@ function create ()
             p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = newP.id;
+            p.tint = Math.random() * 0xffffff;;
             players.push(p);
         }
     });
