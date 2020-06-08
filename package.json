@@ -12,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "phaser": "^3.23.0",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "phaser": "^3.23.0"
   }
 }
