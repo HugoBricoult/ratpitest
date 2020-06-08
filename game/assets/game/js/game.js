@@ -75,10 +75,12 @@ function create ()
                 players[i].x = data[0];
                 players[i].y = data[1];
                 players[i].setVelocityX(data[2]);
+                players[i].setVelocityY(data[3]);
                 players[i].anims.play(data[5]);
             }
         }
     });
+    //remove player
     socket.on('remove_player',(remove_player)=>{
         for(el in playerList){
             if(playerList[el].id == parseInt(remove_player)){
@@ -93,6 +95,7 @@ function create ()
         }
 
     });
+    //add player
     socket.on('new_player',(newPlayer)=>{
         let newP = JSON.parse(newPlayer);
         if(newP.id != idClient){
@@ -127,6 +130,9 @@ function update ()
         player.setVelocityX(player.body.velocity.x +5);
         //emit
         socket.emit('playerMove',[player.x,player.y,player.body.velocity.x +5,player.body.velocity.y,idClient,'right']);
+    }
+    if(cursors.space.isDown){
+        player.setVelocityY(-300);
     }
 }
 
