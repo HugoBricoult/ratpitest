@@ -51,6 +51,7 @@ function create ()
     player.setBounce(0);
     player.setCollideWorldBounds(true);  //body box 8/48 et décallé de 12 par rapport a la base
     player.id = idClient;
+    player.tint = Math.random() * 0xffffff;
     this.anims.create({
         key: 'left',
         frames: this.anims.generateFrameNumbers('frog', { start: 0, end: 15 }),
@@ -105,7 +106,7 @@ function create ()
             p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = newP.id;
-            p.tint = Math.random() * 0xffffff;;
+            p.tint = Math.random() * 0xffffff;
             players.push(p);
         }
     });
