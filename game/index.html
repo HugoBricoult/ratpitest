@@ -12,6 +12,23 @@
     <script>
         let socket = io.connect();
             
+        let idClient; 
+        let playerList;
+
+        //Enregistrement client ID et liste des joueurs
+        socket.on('id',(id)=>{
+            idClient = parseInt(id);
+        });
+        socket.on('player_list',(pl)=>{
+        playerList = JSON.parse(pl);
+        console.log(playerList);
+        
+    });
+        
+        //Update nouveau joueur
+        
+        
+
     </script>
     <script src="./game/assets/game/js/game.js"></script>
 
