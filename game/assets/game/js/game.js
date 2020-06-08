@@ -57,10 +57,10 @@ function create ()
                 player.anims.play('right', true);
             });
             socket.on('posx',(vel)=>{
-                player.x(parseInt(vel));
+                player.x = parseInt(vel);
             });
             socket.on('posy',(vel)=>{
-                player.y(parseInt(vel));
+                player.y = parseInt(vel);
             });
             
 }
