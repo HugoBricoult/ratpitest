@@ -56,6 +56,12 @@ function create ()
                 player.setVelocityX(parseInt(vel));
                 player.anims.play('right', true);
             });
+            socket.on('posx',(vel)=>{
+                player.x(parseInt(vel));
+            });
+            socket.on('posy',(vel)=>{
+                player.y(parseInt(vel));
+            });
             
 }
 
@@ -64,12 +70,16 @@ function update ()
     if (cursors.left.isDown ) {
         player.setVelocityX(player.body.velocity.x -5);
         socket.emit('turn',player.body.velocity.x -5);
+        socket.emit('posx',player.x);
+        socket.emit('posy',player.y);
         player.anims.play('left', true);
     }
     else if (cursors.right.isDown ) {
         player.setVelocityX(player.body.velocity.x +5);
         player.anims.play('right', true);
         socket.emit('turnr',player.body.velocity.x +5);
+        socket.emit('posx',player.x);
+        socket.emit('posy',player.y);
     }
 }
 

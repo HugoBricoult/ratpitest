@@ -30,5 +30,11 @@ io.sockets.on('connection',(socket) => {
     socket.on('turnr',(message)=>{
         socket.broadcast.emit('changer',message);
     });
+    socket.on('posx',(message)=>{
+        socket.broadcast.emit('posx',message);
+    });
+    socket.on('posy',(message)=>{
+        socket.broadcast.emit('posy',message);
+    });
 });
 
