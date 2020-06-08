@@ -41,7 +41,7 @@ function create ()
             p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = playerList[i].id;
-            p.tint = Math.random() * 0xffffff;;
+            p.tint = (playerList[i].id / 1000) * 0xffffff;
             players.push(p);
         }
     }
@@ -133,6 +133,7 @@ function update ()
     }
     if(cursors.space.isDown){
         player.setVelocityY(-300);
+        socket.emit('playerMove',[player.x,player.y,player.body.velocity.x,-300,idClient,'right']);
     }
 }
 
