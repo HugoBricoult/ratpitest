@@ -5,7 +5,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 300 },
+            gravity: { y: 900 },
             debug: false
         }
     },
@@ -133,7 +133,7 @@ function update ()
         socket.emit('playerMove',[player.x,player.y,player.body.velocity.x +5,player.body.velocity.y,idClient,'right']);
     }
     if(cursors.space.isDown){
-        player.setVelocityY(-300);
+        player.setVelocityY(-900);
         socket.emit('playerMove',[player.x,player.y,player.body.velocity.x,-300,idClient,'right']);
     }
 }
