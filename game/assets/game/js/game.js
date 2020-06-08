@@ -133,8 +133,8 @@ function update ()
         socket.emit('playerMove',[player.x,player.y,player.body.velocity.x +5,player.body.velocity.y,idClient,'right']);
     }
     if(cursors.space.isDown){
-        player.setVelocityY(-900);
-        socket.emit('playerMove',[player.x,player.y,player.body.velocity.x,-300,idClient,'right']);
+        player.setVelocityY(-600);
+        socket.emit('playerMove',[player.x,player.y,player.body.velocity.x,-600,idClient,'right']);
     }
 }
 
