@@ -2,7 +2,7 @@
 const GAME_WIDTH = 800;
 const GAME_HEIGHT = 600;
 const GRAVITY = 900;
-const RENDER_FPS = 144;
+const RENDER_FPS = 60;
 const PLAYER_FRAME_WIDTH = 80;
 const PLAYER_FRAME_HEIGT = 80;
 const SPAWN_X = 100;
@@ -92,7 +92,7 @@ function create ()
     //create other players
     for(i in playerList){
         if(playerList[i].id != idClient){
-            let p = this.physics.add.sprite(playerList[i].posx,playerList[i].posy,'frog');
+            let p = this.physics.add.sprite(210,2070,'frog');
             //p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = playerList[i].id;
@@ -170,7 +170,7 @@ function create ()
         if(newP.id != idClient){
             playerList.push(newP);
             console.log(playerList);
-            let p = this.physics.add.sprite(newP.posx,newP.posy,'frog');
+            let p = this.physics.add.sprite(210,2070,'frog');
             //p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = newP.id;
