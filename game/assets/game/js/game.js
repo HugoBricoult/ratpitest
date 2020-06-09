@@ -215,14 +215,11 @@ function update ()
     }
 
     //CURRENT PLAYER VELOCITY Y
-    if(cursors.space.isDown && player.body.touching.down){
+    if(cursors.space.isDown & player.body.blocked.down){
         //jump
         player.setVelocityY(- VELOCITY_Y);
         //emit
         socket.emit('playerMove',[player.x,player.y,player.body.velocity.x,- VELOCITY_Y,idClient,'right']);
-    }
-    if(cursors.up.isDown){
-        console.log(player);
     }
 }
 
