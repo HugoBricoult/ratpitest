@@ -45,11 +45,44 @@ let players = [];
 //INPUTS
 let cursors;
 
+//TIMER VARIABLES
+let isStart = false;
+let isFinish = false;
+
+let startTime = 0;
+let finishTime = 0;
+
+let startCollider;
+let finishCollider;
+
+
+function timerStart(now){
+    if(!isStart){
+        startTime = now;
+        isStart = true;
+    }
+}
+
+function timerStop(now){
+    if(!isFinish){
+        finishTime = now;
+        isFinish = true;
+        console.log(timerconvert((finishTime - startTime)));
+    }
+}
+
+function timerconvert(Time){
+    let date = new Date(Time);
+    return date.getMinutes() + " min(s) "+date.getSeconds()+ " sec(s) "+date.getMilliseconds()+ " ms";
+}
 //LOAD ASSETS
 function preload ()
 {
     this.load.image("tiles", TILE_SET_PATH);
     this.load.tilemapTiledJSON("map", MAP_PATH);
+    this.load.image('bg1', './game/assets/game/environment/bg-1.png');
+    this.load.image('bg2', './game/assets/game/environment/bg-2.png');
+    this.load.image('bg3', './game/assets/game/environment/bg-3.png');
     this.load.spritesheet('frog',
         PLAYER_SKIN_PATH,
         { frameWidth: PLAYER_FRAME_WIDTH, frameHeight: PLAYER_FRAME_HEIGT }
@@ -59,9 +92,31 @@ function preload ()
 //GAME CREATE AND SOCKET LISTENNER
 function create ()
 {
-    console.log(this.cameras.main);
     //RENDER FPS
     this.physics.world.setFPS(RENDER_FPS);
+
+    //BG MAP
+
+    this.BG1 = this.add.tileSprite(0 ,-5, this.cameras.main.width / 4, this.cameras.main.height / 4, "bg1");
+    let scaleX1 = this.cameras.main.width / this.BG1.width
+    let scaleY1 = this.cameras.main.height / this.BG1.height
+    this.BG1.setOrigin(0, 0);
+    let scale1 = Math.max(scaleX1, scaleY1);
+    this.BG1.setScale(scale1).setScrollFactor(0);
+
+    this.BG2 = this.add.tileSprite(0 ,-5, this.cameras.main.width / 4, this.cameras.main.height / 4, "bg2");
+    let scaleX2 = this.cameras.main.width / this.BG2.width
+    let scaleY2 = this.cameras.main.height / this.BG2.height
+    this.BG2.setOrigin(0, 0);
+    let scale2 = Math.max(scaleX2, scaleY2);
+    this.BG2.setScale(scale2).setScrollFactor(0);
+
+    this.BG3 = this.add.tileSprite(0 ,-5, this.cameras.main.width / 3, this.cameras.main.height / 3, "bg3");
+    let scaleX3 = this.cameras.main.width / this.BG3.width
+    let scaleY3 = this.cameras.main.height / this.BG3.height
+    this.BG3.setOrigin(0, 0);
+    let scale3 = Math.max(scaleX3, scaleY3);
+    this.BG3.setScale(scale3).setScrollFactor(0);
 
     //CREATE MAP
     const MAP = this.make.tilemap({ key: "map"});
@@ -86,7 +141,7 @@ function create ()
     const decorsOverlay = MAP.createStaticLayer("decors overlay", tset, 0, 0);
     const decors = MAP.createStaticLayer("decors", tset, 0, 0);
 
-    const spawnPoint = MAP.objects[1];
+    const spawnPoint = MAP.findObject("spawn",(dec)=> dec.name == "spawn");
 
 
     //create other players
@@ -136,6 +191,10 @@ function create ()
     //keyboard
     cursors = this.input.keyboard.createCursorKeys();
 
+    //timer
+    startCollider = MAP.findObject("tracker",obj => obj.name == "trackerstart");
+    finishCollider = MAP.findObject("tracker",obj => obj.name == "trackerend");
+    
     //update other players
     socket.on('updatePlayerMove',(data)=>{
         let d = JSON.stringify(data);
@@ -181,7 +240,6 @@ function create ()
             players.push(p);
         }
     });
-            
 }
 
 //GAME LOOP
@@ -222,6 +280,18 @@ function update ()
         socket.emit('playerMove',[player.x,player.y,player.body.velocity.x,- VELOCITY_Y,idClient,'right']);
     }
 
-    
+    //startzone
+    if(player.x >= startCollider.x & player.x <= (startCollider.x+16) & player.y+2 >= startCollider.y-150 & player.y <=startCollider.y){
+        timerStart(this.time.now);
+    }
+    if(player.x >= finishCollider.x & player.x <= (finishCollider.x+16) & player.y+2 >= finishCollider.y-600 & player.y <=finishCollider.y){
+        timerStop(this.time.now);
+    }
+
+    //bg update 
+    this.BG1.tilePositionX -= .02;
+    this.BG2.tilePositionX += .02;
 }
+
+
 

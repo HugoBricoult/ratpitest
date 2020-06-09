@@ -89,7 +89,7 @@
                 {
                  "height":0,
                  "id":2,
-                 "name":"",
+                 "name":"spawn",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -103,9 +103,44 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"tracker",
+         "objects":[
+                {
+                 "height":0,
+                 "id":3,
+                 "name":"trackerstart",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":362,
+                 "y":2072
+                }, 
+                {
+                 "height":0,
+                 "id":4,
+                 "name":"trackerend",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":4050, 
+                 "y":443
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":3,
+ "nextlayerid":8,
+ "nextobjectid":6,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.5",
