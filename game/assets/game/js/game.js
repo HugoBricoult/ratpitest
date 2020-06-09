@@ -215,7 +215,7 @@ function update ()
     }
 
     //CURRENT PLAYER VELOCITY Y
-    if(cursors.space.isDown){
+    if(cursors.space.isDown && player.body.touching.down){
         //jump
         player.setVelocityY(- VELOCITY_Y);
         //emit
