@@ -53,7 +53,7 @@ io.sockets.on('connection',(socket) => {
             }
         }
         //socket.broadcast.emit('remove_player',JSON.stringify(player_list));
-    })
+    });
 
     //Mouvement update
     socket.on('playerMove',(data)=>{
