@@ -86,21 +86,25 @@ function preload ()
     this.load.image('bg1', './game/assets/game/environment/bg-1.png');
     this.load.image('bg2', './game/assets/game/environment/bg-2.png');
     this.load.image('bg3', './game/assets/game/environment/bg-3.png');
+
+    this.load.audio('backmusic', 'game/assets/game/audio/theme.mp3');
+
     this.load.spritesheet('frog',
         PLAYER_SKIN_PATH,
         { frameWidth: PLAYER_FRAME_WIDTH, frameHeight: PLAYER_FRAME_HEIGT }
     );
-    this.load.audio('backmusic', 'game/assets/game/audio/theme.mp3');
 }
 
 //GAME CREATE AND SOCKET LISTENNER
 function create ()
 {
-    
-    
-    
     //RENDER FPS
     this.physics.world.setFPS(RENDER_FPS);
+
+    //MUSIC
+
+    let soundback = this.sound.add('backmusic', {volume: 0.5});
+    soundback.play();
 
     //BG MAP
 
@@ -177,7 +181,7 @@ function create ()
     const camera = this.cameras.main;
     camera.startFollow(player);
     camera.setBounds(0, 0, MAP.widthInPixels, MAP.heightInPixels);
-    
+
     this.physics.add.collider(player, Road);
     this.physics.add.collider(player, plateforms);
 
@@ -207,14 +211,8 @@ function create ()
         fill: "#ffffff",
         padding: { x: 20, y: 10 },
         backgroundColor: "#000000"}).setScrollFactor(0);
-    
 
-    //MUSIC
 
-    let soundback = this.sound.add('backmusic');
-    soundback.play();
-
-    
     //update other players
     socket.on('updatePlayerMove',(data)=>{
         let d = JSON.stringify(data);
@@ -273,7 +271,7 @@ function update ()
         //emit
         socket.emit('playerMove',[player.x,player.y,player.body.velocity.x - VELOCITY_RIGHT_LEFT_CHANGE_X,player.body.velocity.y,idClient,'left']);
         socket.emit('playerPos',[]);
-        
+
     }
     else if (cursors.right.isDown & player.body.velocity.x <= VELOCITY_X_MAX_SPEED) {
         //right
@@ -308,7 +306,7 @@ function update ()
         timerStop(this.time.now,timerText);
     }
 
-    //bg update 
+    //bg update
     this.BG1.tilePositionX -= .03;
     this.BG2.tilePositionX += .02;
     this.BG3.tilePositionX -= .01;
