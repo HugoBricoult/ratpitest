@@ -46,6 +46,8 @@ let players = [];
 let cursors;
 
 //TIMER VARIABLES
+let timerText;
+
 let isStart = false;
 let isFinish = false;
 
@@ -63,11 +65,12 @@ function timerStart(now){
     }
 }
 
-function timerStop(now){
+function timerStop(now,timer){
     if(!isFinish){
         finishTime = now;
         isFinish = true;
         console.log(timerconvert((finishTime - startTime)));
+        timer.setText(timerconvert((finishTime - startTime)));
     }
 }
 
@@ -92,6 +95,9 @@ function preload ()
 //GAME CREATE AND SOCKET LISTENNER
 function create ()
 {
+    
+    
+    
     //RENDER FPS
     this.physics.world.setFPS(RENDER_FPS);
 
@@ -194,6 +200,12 @@ function create ()
     //timer
     startCollider = MAP.findObject("tracker",obj => obj.name == "trackerstart");
     finishCollider = MAP.findObject("tracker",obj => obj.name == "trackerend");
+
+    timerText = this.add.text(16, 16, "Timer : ", {
+        font: "18px monospace",
+        fill: "#ffffff",
+        padding: { x: 20, y: 10 },
+        backgroundColor: "#000000"}).setScrollFactor(0);
     
     //update other players
     socket.on('updatePlayerMove',(data)=>{
@@ -285,7 +297,7 @@ function update ()
         timerStart(this.time.now);
     }
     if(player.x >= finishCollider.x & player.x <= (finishCollider.x+16) & player.y+2 >= finishCollider.y-600 & player.y <=finishCollider.y){
-        timerStop(this.time.now);
+        timerStop(this.time.now,timerText);
     }
 
     //bg update 
