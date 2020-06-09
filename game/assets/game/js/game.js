@@ -215,7 +215,7 @@ function update ()
     }
 
     //CURRENT PLAYER VELOCITY Y
-    if(cursors.space.isDown & (player.body.blocked.down || player.body.blocked.left || player.body.blocked.right)){
+    if(cursors.space.isDown & player.body.blocked.down){
         //jump
         player.setVelocityY(- VELOCITY_Y);
         //emit
