@@ -1,5 +1,5 @@
 //GAME PARAMETERS
-const GAME_WIDTH = 800;
+const GAME_WIDTH = 1200;
 const GAME_HEIGHT = 600;
 const GRAVITY = 900;
 const RENDER_FPS = 144;
