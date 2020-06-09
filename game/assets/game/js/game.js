@@ -103,7 +103,7 @@ function create ()
 
     //MUSIC
 
-    let soundback = this.sound.add('backmusic', {volume: 0.5});
+    let soundback = this.sound.add('backmusic', {volume: 0.1});
     soundback.play();
 
     //BG MAP
