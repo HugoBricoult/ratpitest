@@ -301,8 +301,9 @@ function update ()
     }
 
     //bg update 
-    this.BG1.tilePositionX -= .02;
+    this.BG1.tilePositionX -= .03;
     this.BG2.tilePositionX += .02;
+    this.BG3.tilePositionX -= .01;
 }
 
 
