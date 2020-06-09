@@ -90,6 +90,7 @@ function preload ()
         PLAYER_SKIN_PATH,
         { frameWidth: PLAYER_FRAME_WIDTH, frameHeight: PLAYER_FRAME_HEIGT }
     );
+    this.load.audio('backmusic', 'game/assets/game/audio/theme.mp3');
 }
 
 //GAME CREATE AND SOCKET LISTENNER
@@ -206,6 +207,13 @@ function create ()
         fill: "#ffffff",
         padding: { x: 20, y: 10 },
         backgroundColor: "#000000"}).setScrollFactor(0);
+    
+
+    //MUSIC
+
+    let soundback = this.sound.add('backmusic');
+    soundback.play();
+
     
     //update other players
     socket.on('updatePlayerMove',(data)=>{
