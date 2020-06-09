@@ -9,7 +9,7 @@ const SPAWN_X = 100;
 const SPAWN_Y = 450;
 const VELOCITY_RIGHT_LEFT_CHANGE_X = 5;
 const VELOCITY_X_MAX_SPEED = 300;
-const VELOCITY_Y = 400;
+const VELOCITY_Y = 460;
 const VELOCITY_STOP_SPEED = 10;
 
 const PLAYER_SKIN_PATH = './game/assets/game/img/frog.png';
