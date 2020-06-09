@@ -93,12 +93,14 @@ function create ()
     for(i in playerList){
         if(playerList[i].id != idClient){
             let p = this.physics.add.sprite(playerList[i].posx,playerList[i].posy,'frog');
-            p.setCollideWorldBounds(true);
+            //p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = playerList[i].id;
             p.tint = (playerList[i].id / 1000) * 0xffffff;
-            players.push(p);
             p.setScale(0.25);
+            this.physics.add.collider(p,Road);
+            this.physics.add.collider(p,plateforms);
+            players.push(p);
         }
     }
 
@@ -169,11 +171,13 @@ function create ()
             playerList.push(newP);
             console.log(playerList);
             let p = this.physics.add.sprite(newP.posx,newP.posy,'frog');
-            p.setCollideWorldBounds(true);
+            //p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = newP.id;
             p.tint = (newP.id/1000) * 0xffffff;
-            p.setScale(0.5);
+            p.setScale(0.25);
+            this.physics.add.collider(p,Road);
+            this.physics.add.collider(p,plateforms);
             players.push(p);
         }
     });
