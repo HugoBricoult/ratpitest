@@ -262,7 +262,8 @@ function create ()
 
 //GAME LOOP
 function update ()
-{
+{   
+    
     //CURRENT PLAYER VELOCITY X
     if (cursors.left.isDown & player.body.velocity.x >= -VELOCITY_X_MAX_SPEED) {
         //left
@@ -291,7 +292,7 @@ function update ()
     }
 
     //CURRENT PLAYER VELOCITY Y
-    if(cursors.space.isDown & player.body.blocked.down){
+    if(cursors.space.isDown & player.body.blocked.down || cursors.up.isDown){
         //jump
         player.setVelocityY(- VELOCITY_Y);
         //emit
@@ -304,7 +305,9 @@ function update ()
     }
     if(player.x >= finishCollider.x & player.x <= (finishCollider.x+16) & player.y+2 >= finishCollider.y-600 & player.y <=finishCollider.y){
         timerStop(this.time.now,timerText);
-    }
+    }else if(!isFinish){
+        timerText.setText("Timer :"+timerconvert((this.time.now - startTime)));
+    };
 
     //bg update
     this.BG1.tilePositionX -= .03;
