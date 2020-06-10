@@ -20,6 +20,7 @@
 <body>
     
     <script src="/socket.io/socket.io.js"></script>
+    <script src="./game/assets/game/js/game_config.js"></script>
     <script>
         let socket = io.connect();
             
@@ -32,7 +33,6 @@
         });
         socket.on('player_list',(pl)=>{
         playerList = JSON.parse(pl);
-        console.log(playerList);
         
     });
         
@@ -41,6 +41,10 @@
         
 
     </script>
+
+    <div class="game" id="game">
+
+    </div>
     
     <script src="./game/assets/game/js/game.js"></script>
     

@@ -31,7 +31,8 @@ io.sockets.on('connection',(socket) => {
         "posy":450,
         "velx":0,
         "vely":0,
-        "anim":"right"
+        "anim":"right",
+        "pseudo":"Spaceman"+id
     };
 
     player_list.push(player_param);
@@ -57,7 +58,25 @@ io.sockets.on('connection',(socket) => {
 
     //Mouvement update
     socket.on('playerMove',(data)=>{
+        for(el in player_list){
+            if(data[4] == player_list[el].id){
+                data.push(player_list[el].pseudo);
+                break;
+            }
+        }
+        data = JSON.stringify(data);
         socket.broadcast.emit('updatePlayerMove',data);
+    });
+
+    socket.on('pseudoSet',(pseudo)=>{
+        let data = JSON.parse(pseudo);
+        for(el in player_list){
+            if(data[1] == player_list[el].id){
+                player_list[el].pseudo = data[0];
+                break;
+            }
+        }
+        socket.broadcast.emit('updatePseudo',pseudo);
     });
 });
 
