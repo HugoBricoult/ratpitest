@@ -67,7 +67,7 @@ function timerStop(now,timer){
         finishTime = now;
         isFinish = true;
         timer.setText(timerconvert((finishTime - startTime)));
-        socket.emit("score",[finishTime - startTime,pseudo]);
+        socket.emit("score",{"time":finishTime - startTime,"pseudo":pseudo});
     }
 }
 
@@ -166,15 +166,7 @@ function create ()
             this.physics.add.collider(p,plateforms);
             players.push(p);
 
-            let text = this.add.text(p.x - PSEUDO_OFFSET_X,p.y - PSEUDO_OFFSET_Y,playerList[i].pseudo,{
-                font: "15px monospace",
-                fill: "#ffffff",
-                padding: { x: 50, y: 10 },
-                backgroundColor: "#eeeeee00",
-                color:"#cccccc",
-                align: "center",
-                fixedWidth:300
-            });
+            let text = this.add.text(p.x - PSEUDO_OFFSET_X,p.y - PSEUDO_OFFSET_Y,playerList[i].pseudo,PSEUDO_CONFIG);
             text.id = playerList[i].id;
             playersPseudoList.push(text);
         }
@@ -299,15 +291,7 @@ function create ()
             this.physics.add.collider(p,plateforms);
             players.push(p);
 
-            let text = this.add.text(p.x,p.y,newP.pseudo,{
-                font: "15px monospace",
-                fill: "#ffffff",
-                padding: { x: 50, y: 10 },
-                backgroundColor: "#eeeeee00",
-                color:"#cccccc",
-                align: "center",
-                fixedWidth:300
-            });
+            let text = this.add.text(p.x,p.y,newP.pseudo,PSEUDO_CONFIG);
             text.id = newP.id;
             playersPseudoList.push(text);
         }
@@ -386,15 +370,7 @@ function update ()
             inputPseudo.setScrollFactor(999);
             pseudoText.setScrollFactor(999);
             isGameReady = true;
-            pseudoOverPlayer = this.add.text(player.x ,player.y,pseudo,{
-                font: "15px monospace",
-                fill: "#ffffff",
-                padding: { x: 50, y: 10 },
-                backgroundColor: "#eeeeee00",
-                color:"#cccccc",
-                align: "center",
-                fixedWidth:300
-            });
+            pseudoOverPlayer = this.add.text(player.x - PSEUDO_OFFSET_X ,player.y - PSEUDO_OFFSET_Y,pseudo,PSEUDO_CONFIG);
             socket.emit("pseudoSet",JSON.stringify([pseudo,idClient]));
         }
     }

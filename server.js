@@ -1,9 +1,11 @@
 //Appel des modules de node
 const express = require('express');
 const app = express();
+const fs = require('fs');
 
 const serv = require('http').Server(app);
 const port = 3000;
+const top10="top10.json";
 
 let player_list = [];
 let id_list = new Set();
@@ -80,9 +82,48 @@ io.sockets.on('connection',(socket) => {
     });
 
     socket.on('score',(score)=>{
-        console.log(score[1]+" à fait un temps de "+score[0]);
+        let mylist=readTopToList(top10);
+        let newlist=checkAndAddToTop10(mylist,score);
+        writeListToTop(top10,newlist);
     });
 });
+
+
+function checkAndAddToTop10(listTop,Contender){//takes a list of object and the contender as object
+    let added=false;
+    for(el in listTop){
+        if (listTop[el].time>=Contender.time){
+            listTop.splice(el,0,Contender);
+            break
+        }
+         //returns new top based on time in ms as a list of objects
+    }
+    if(listTop.length <10 && !added){
+        listTop.push(Contender);
+    }else if(listTop.length >10){
+        listTop=listTop.slice(0,10);
+    }
+    return listTop;
+}
+function writeListToTop(filepath,listTop){
+    let obj={
+        "top":listTop
+    }
+    let json = JSON.stringify(obj)
+    fs.writeFile (filepath, json, function(err) {
+        if (err) throw err;
+        console.log('Updating leaderboard');
+        });
+}
+
+function readTopToList(filepath){
+    return JSON.parse(fs.readFileSync(filepath, 'utf8'))["top"]
+}
+
+
+
+let test={"pseudo":"newratpi2",
+time: 97011}
 
 
 

@@ -14,6 +14,15 @@ const VELOCITY_STOP_SPEED = 15;
 
 const PSEUDO_OFFSET_X = 150;
 const PSEUDO_OFFSET_Y = 40;
+const PSEUDO_CONFIG = {
+    font: "15px monospace",
+    fill: "#ffffff",
+    padding: { x: 50, y: 10 },
+    backgroundColor: "#eeeeee00",
+    color:"#cccccc",
+    align: "center",
+    fixedWidth:300
+};
 
 const PLAYER_SKIN_PATH = './game/assets/game/img/frog.png';
 const TILE_SET_PATH = './game/assets/game/img/tileset.png';
