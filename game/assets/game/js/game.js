@@ -54,6 +54,7 @@ let isFinish = false;
 let startTime = 0;
 let finishTime = 0;
 
+
 let startCollider;
 let finishCollider;
 
@@ -312,6 +313,9 @@ function update ()
     this.BG1.tilePositionX -= .03;
     this.BG2.tilePositionX += .02;
     this.BG3.tilePositionX -= .01;
+    if(isStart & !isFinish){
+        timerText.setText(timerconvert((this.time.now - startTime)));
+    }
 }
 
 
