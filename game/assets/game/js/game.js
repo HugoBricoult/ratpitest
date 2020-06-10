@@ -66,8 +66,8 @@ function timerStop(now,timer){
     if(!isFinish){
         finishTime = now;
         isFinish = true;
-        console.log(timerconvert((finishTime - startTime)));
         timer.setText(timerconvert((finishTime - startTime)));
+        socket.emit("score",[finishTime - startTime,pseudo]);
     }
 }
 

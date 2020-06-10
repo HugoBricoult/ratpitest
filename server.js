@@ -78,6 +78,10 @@ io.sockets.on('connection',(socket) => {
         }
         socket.broadcast.emit('updatePseudo',pseudo);
     });
+
+    socket.on('score',(score)=>{
+        console.log(score[1]+" à fait un temps de "+score[0]);
+    });
 });
 
 
