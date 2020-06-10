@@ -1,4 +1,3 @@
-//GAME CONFIG
 let config = {
     type: Phaser.AUTO,
     width: GAME_WIDTH,
@@ -160,7 +159,6 @@ function create ()
             //p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = playerList[i].id;
-            p.tint = (playerList[i].id / 1000) * 0xffffff;
             p.setScale(0.25);
             this.physics.add.collider(p,Road);
             this.physics.add.collider(p,plateforms);
@@ -194,6 +192,7 @@ function create ()
         frameRate: 15,
         repeat: -1
     });
+
     this.anims.create({
         key: 'right',
         frames: this.anims.generateFrameNumbers('frog', { start: 16, end: 30 }),
@@ -285,7 +284,6 @@ function create ()
             //p.setCollideWorldBounds(true);
             p.setBounce(0);
             p.id = newP.id;
-            p.tint = (newP.id/1000) * 0xffffff;
             p.setScale(0.25);
             this.physics.add.collider(p,Road);
             this.physics.add.collider(p,plateforms);
