@@ -15,6 +15,6 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "phaser": "^3.23.0"
+    "phaser": "^3.55.2"
   }
 }
